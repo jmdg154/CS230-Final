@@ -1,6 +1,6 @@
-streamlit==0.80.0
-pandas==1.2.4
-matplotlib.pyplot==3.4.1
-numpy==1.20.2
-pydeck==0.6.2
-mapbox==0.18.0
+python -m pop install streamlit==0.80.0
+python -m pop install pandas==1.2.4
+python -m pop install matplotlib.pyplot==3.4.1
+python -m pop install numpy==1.20.2
+python -m pop install pydeck==0.6.2
+python -m pop install mapbox==0.18.0
