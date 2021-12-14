@@ -6,11 +6,11 @@ URL:
 
 Description:
 
-This program is used to interpret data based on Universities around the U.S. and its territories. The data includes
+This program is used to interpret data based on Universities across the U.S. and its territories. The data includes
 location (latitude and longitude) as well as statistical identifiers. The heatmap is used to visualize the significance
-of each school within the selected statistical query. The chart is used to display the frequency of each code for the
-selected identifier within the selected state. The data is also displayed at the beginning of the program, and a regular
-map is located at the end for reference.
+of each area based on the area's density of universities for the selected statistical entity. The chart is used to
+display the frequency of each code for the selected entity within the selected state. A regular map is located at
+the end for reference, along with the data and short descriptions of each statistical entity.
 
 """
 
@@ -53,7 +53,7 @@ def heatmap(df, scheme, column):
     df = df[['lon', 'lat']]
     weight = 0.5
 
-#This if loop uses RBG color codes to set the color scale for the heatmap based on the selected scheme
+#This if loop uses RBG color codes to set the color scale for the visuals based on the selected scheme
     if scheme == 'Red':
         c1 = [255,123,123]
         c2 = [255,83,83]
@@ -224,7 +224,13 @@ def main():
     df = df.rename(columns={'LON': 'lon'})
 
     st.title("Final Project - University Locations")
-    st.write("This page is used to visualize the weight different areas have on different statistical queries")
+    st.write("This program is used to interpret data based on universities across the U.S. and its territories. The data"
+             " includes location (latitude and longitude) as well as each universities' statistical identifiers. The heatmap is used to "
+             "visualize the significance of each area based on the area's density of universities for the selected "
+             "statistical entity. The chart is used to display the frequency of universities with each identifier under the selected entity within"
+             " the selected state. A fixed map showing the location of each university is located at the end for reference, along with the data and short "
+             "descriptions of each statistical entity. Note that some codes are region specific, such as NECTA, "
+             "which only covers the New England area.")
     st.header("Visuals")
 
     states = df['STATE'].sort_values(ascending=True)
@@ -248,8 +254,16 @@ def main():
     worldmap(df, scheme)
     st.write('This map is shown to compare the weight of different regions with actual locations of universities around '
              'the country.')
-    st.subheader("The data: ")
+    st.subheader("The data ")
     st.dataframe(df)
+
+    st.subheader("Definitions")
+    st.write(f"LOCALE: The NCES locale framework was designed to provide a general indicator of the type of geographic area where a school is located. [source](https://nces.ed.gov/programs/edge/docs/NCES_LOCALE_USERSMANUAL_2016012.pdf) \n"
+             "\nCBSA: A Core Based Statistical Area (CBSA) consists of a U.S. county or counties or equivalent entities associated with at least one core (urbanized area or urban cluster) with a population of at least 10,000 along with any adjacent counties having a high degree of social and economic integration with the core as measured through commuting ties with the counties containing the core. [source](https://earthworks.stanford.edu/catalog/stanford-dy982nn7286)\n"
+             "\nCSA: A geographic entity consisting of two or more adjacent Core Based Statistical Areas with employment interchange measures of at least 15. [source](https://www.federalregister.gov/documents/2021/07/16/2021-15159/2020-standards-for-delineating-core-based-statistical-areas)\n"
+             "\nNECTA: An alternative set of geographic entities, similar in concept to the county-based core based statistical areas (CBSAs) delineated nationwide, that the Office of Management and Budget delineates in New England based on county subdivisions—usually cities and towns. NECTAs are delineated using the same criteria as county-based CBSAs, and, similar to CBSAs, NECTAs are categorized as metropolitan or micropolitan. [source](https://www.census.gov/programs-surveys/metro-micro/about/glossary.html)\n"
+             "\nCD: Census divisions are groupings of states that are subdivisions of the four census regions. [source](https://www.easidemographics.com/mdbhelp/html/census_division_1.htm)\n"
+             "\nSLDL & SLDU: State legislative districts are the areas from which members are elected to state or equivalent entity legislatures. State legislative districts embody the upper (senate—SLDU) and lower (house—SLDL) chambers of the state legislatures for all 50 states, the District of Columbia, and Puerto Rico. [source](https://nces.ed.gov/programs/edge/docs/EDGE_GEOCODE_POSTSEC_FILEDOC.pdf)")
 
 main()
 
